@@ -1,0 +1,30 @@
+# 默认忽略的文件
+/shelf/
+/workspace.xml
+
+# 数据源
+/dataSources/
+/dataSources.local.xml
+
+# AWS 插件
+/aws.xml
+
+# Gradle
+/gradle.xml
+/jarRepositories.xml
+
+# 其他
+/uiDesigner.xml
+/libraries/
+/modules/
+/artifacts/
+/compiler.xml
+/encodings.xml
+/misc.xml
+/modules.xml
+/vcs.xml
+
+# 不忽略的文件
+!.gitignore
+!codeStyles/
+!inspectionProfiles/

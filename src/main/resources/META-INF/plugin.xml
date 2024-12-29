@@ -1,0 +1,112 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+  <id>com.github.yreader</id>
+
+  <!-- Public plugin name should be written in Title Case.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+  <name>Yreader</name>
+
+  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+  <vendor email="your.email@example.com" url="https://github.com/yourusername/yreader">Yreader</vendor>
+
+  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+  <description><![CDATA[
+    <h2>Yreader - IDEA 小说阅读插件</h2>
+    <p>一个优雅的 IDEA 小说阅读插件，让你在编程的同时也能享受阅读的乐趣。</p>
+    
+    <h3>主要特性</h3>
+    <ul>
+        <li>支持 TXT 格式小说导入</li>
+        <li>自动分页显示，可自定义每页行数和每行字数</li>
+        <li>使用 JavaDoc 注释格式显示，完美融入代码</li>
+        <li>支持快捷键和鼠标滚轮翻页</li>
+        <li>一键隐藏/显示内容</li>
+        <li>状态持久化，重启 IDEA 后保持阅读进度</li>
+    </ul>
+
+    <h3>使用方法</h3>
+    <p>
+    1. Tools -> Yreader -> 加载小说 (Ctrl+Alt+N)<br>
+    2. 选择 TXT 格式小说文件<br>
+    3. 使用快捷键或鼠标滚轮翻页：<br>
+       - Alt+→ : 下一页<br>
+       - Alt+← : 上一页<br>
+       - Ctrl+Alt+H : 显示/隐藏内容<br>
+    4. 在 Tools -> Yreader -> 阅读设置 中自定义显示格式
+    </p>
+  ]]></description>
+
+  <!-- Product and plugin compatibility requirements.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <!-- Extension points defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="config.NovelReaderConfig"/>
+    <projectConfigurable
+            instance="config.NovelReaderConfigurable"
+            displayName="Novel Reader Settings"/>
+  </extensions>
+
+  <!-- Actions defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-actions.html -->
+  <actions>
+    <group id="Yreader.MainGroup" 
+           text="Yreader" 
+           description="Yreader plugin menu">
+        <add-to-group group-id="ToolsMenu" anchor="last"/>
+        
+        <action id="Yreader.LoadNovel" 
+                class="actions.InsertNovelAction" 
+                text="加载小说" 
+                description="加载小说文件">
+            <keyboard-shortcut first-keystroke="control alt N" keymap="$default"/>
+        </action>
+        
+        <action id="Yreader.Settings" 
+                class="actions.NovelSettingsAction" 
+                text="阅读设置" 
+                description="打开阅读器设置"/>
+
+        <separator/>
+
+        <action id="Yreader.ToggleNovel"
+                class="actions.ToggleNovelAction"
+                text="显示/隐藏内容"
+                description="显示或隐藏小说内容">
+            <keyboard-shortcut first-keystroke="control alt H" keymap="$default"/>
+        </action>
+    </group>
+
+    <action id="Yreader.NextPage" 
+            class="actions.NextPageAction" 
+            text="下一页" 
+            description="显示下一页小说内容">
+        <keyboard-shortcut first-keystroke="alt RIGHT" keymap="$default"/>
+        <mouse-shortcut keystroke="wheel_down" keymap="$default"/>
+    </action>
+    
+    <action id="Yreader.PreviousPage" 
+            class="actions.PreviousPageAction" 
+            text="上一页" 
+            description="显示上一页小说内容">
+        <keyboard-shortcut first-keystroke="alt LEFT" keymap="$default"/>
+        <mouse-shortcut keystroke="wheel_up" keymap="$default"/>
+    </action>
+  </actions>
+
+  <change-notes><![CDATA[
+    <h3>版本 1.0.0</h3>
+    <ul>
+        <li>支持 TXT 格式小说导入</li>
+        <li>自定义显示格式</li>
+        <li>快捷键和鼠标操作</li>
+        <li>内容显示/隐藏功能</li>
+        <li>阅读进度保存</li>
+    </ul>
+  ]]></change-notes>
+</idea-plugin>
